@@ -1,14 +1,16 @@
 package Components.Windows;
 
-import Components.MainMenuPanel;
-import Components.MenuBackgroundPanel;
+import Components.Panels.MainMenuPanel;
+import Components.Panels.MenuBackgroundPanel;
 
 import javax.swing.*;
 
 public class MainMenuWindow extends JFrame {
     public MainMenuWindow() {
         setTitle("Menu");
-        add(new MenuBackgroundPanel());
+
+        add(new MenuBackgroundPanel(this));
+
         pack();
         setLocationRelativeTo(null);
         setMinimumSize(MainMenuPanel.preferredSize);
