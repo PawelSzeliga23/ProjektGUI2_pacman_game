@@ -1,5 +1,7 @@
 package Components;
 
+import Controllers.SoundController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -17,6 +19,7 @@ public class CustomButton extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                SoundController.clickSound();
             }
 
             @Override

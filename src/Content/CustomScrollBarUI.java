@@ -3,7 +3,7 @@ package Content;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
-
+//klasa stworzona przy pomocy materialu https://www.youtube.com/watch?v=gxhTjQMqjJY&t=386s
 public class CustomScrollBarUI extends BasicScrollBarUI {
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {

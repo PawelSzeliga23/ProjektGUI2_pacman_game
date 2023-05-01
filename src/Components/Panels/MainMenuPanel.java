@@ -39,7 +39,10 @@ public class MainMenuPanel extends JPanel {
         add(exitButton);
 
         setPreferredSize(preferredSize);
-        highScoresButton.addActionListener(e -> SwingUtilities.invokeLater(() -> new HighScoreWindow(actualFrame)));
+        highScoresButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
+            actualFrame.setEnabled(false);
+            new HighScoreWindow(actualFrame);
+        }));
 
         exitButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
             actualFrame.setEnabled(false);

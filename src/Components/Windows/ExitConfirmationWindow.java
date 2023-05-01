@@ -2,6 +2,7 @@ package Components.Windows;
 
 import Components.CustomButton;
 import Components.CustomFont;
+import Controllers.SoundController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,12 +30,14 @@ public class ExitConfirmationWindow extends JFrame {
         CustomButton noButton = new CustomButton("No");
 
         yesButton.addActionListener(e -> {
+            SoundController.clickSound();
             dispose();
             frameToClose.dispose();
         });
 
         noButton.addActionListener(e -> {
             frameToClose.setEnabled(true);
+            SoundController.clickSound();
             dispose();
         });
 
@@ -48,6 +51,8 @@ public class ExitConfirmationWindow extends JFrame {
         pack();
         setLocationRelativeTo(jFrame);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(900,120));
+        setResizable(false);
         setVisible(true);
     }
 }

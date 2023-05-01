@@ -3,8 +3,8 @@ package Data;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private String name;
-    private int score;
+    private final String name;
+    private final int score;
 
     public Player(String name, int score) {
         this.name = name;

@@ -5,12 +5,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HighScoreWindow extends JFrame {
-    public HighScoreWindow(JFrame jFrame) throws HeadlessException {
+    public HighScoreWindow(JFrame mainMenu) throws HeadlessException {
         setTitle("High Scores");
-        HighScorePanel highScorePanel = new HighScorePanel();
+        HighScorePanel highScorePanel = new HighScorePanel(mainMenu, this);
         add(highScorePanel);
         pack();
-        setLocationRelativeTo(jFrame);
+        setLocationRelativeTo(mainMenu);
         setMinimumSize(new Dimension(highScorePanel.getWidth()+100,highScorePanel.getHeight()+100));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);

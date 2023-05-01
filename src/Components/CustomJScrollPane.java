@@ -4,7 +4,7 @@ import Content.CustomScrollBarUI;
 
 import javax.swing.*;
 import java.awt.*;
-
+//klasa została utworzona z pomoca dokumentacji https://docs.oracle.com/javase/8/docs/api/javax/swing/JScrollPane.html
 public class CustomJScrollPane extends JScrollPane {
     public CustomJScrollPane(Component component) {
         super(component);

@@ -9,11 +9,18 @@ public class FileStreamController {
     public  static ArrayList<Player>  readFile(){
         try {
             ArrayList<Player> playerLeaderBoard;
-            FileInputStream fileInputStream = new FileInputStream("src/Data/LeaderBoard.txt");
+            File path = new File("src/Data/LeaderBoard.txt");
+            FileInputStream fileInputStream = new FileInputStream(path);
+            if (path.length() != 0){
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             playerLeaderBoard =(ArrayList<Player>) objectInputStream.readObject();
             objectInputStream.close();
+            playerLeaderBoard.add(new Player("a", Integer.MAX_VALUE));
             playerLeaderBoard.sort(new PlayerComparator().reversed());
+            }else {
+                playerLeaderBoard = new ArrayList<Player>();
+                playerLeaderBoard.add(new Player("a", Integer.MAX_VALUE));
+            }
             return playerLeaderBoard;
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
