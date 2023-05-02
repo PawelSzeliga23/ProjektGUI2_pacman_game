@@ -2,6 +2,7 @@ package Components.Windows;
 
 import Components.CustomButton;
 import Components.CustomFont;
+import Components.CustomJLabel;
 import Controllers.SoundController;
 
 import javax.swing.*;
@@ -13,10 +14,7 @@ public class IndexNotSelectedExceptionWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        JLabel head = new JLabel("Index not selected");
-        head.setFont(CustomFont.getFont(CustomFont.NORMAL_SIZE));
-        head.setForeground(Color.YELLOW);
-        head.setHorizontalAlignment(SwingConstants.CENTER);
+        CustomJLabel head = new CustomJLabel("Index not selected",CustomFont.NORMAL_SIZE);
 
         CustomButton okButton = new CustomButton("OK");
         okButton.setHorizontalAlignment(SwingConstants.CENTER);

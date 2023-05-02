@@ -6,23 +6,21 @@ import Controllers.SoundController;
 
 import javax.swing.*;
 import java.awt.*;
-
+//border factory z tego filmiku https://www.youtube.com/watch?v=Eb2QydjQvV4
 public class HighScorePanel extends JPanel {
     public HighScorePanel(JFrame mainMenu, JFrame highScoreWindow) {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
 
-
-        JLabel head = new JLabel("High Scores Board");
-        head.setFont(CustomFont.getFont(CustomFont.TITLE_SIZE));
-        head.setForeground(Color.YELLOW);
-        head.setHorizontalAlignment(SwingConstants.CENTER);
+        CustomJLabel head = new CustomJLabel("High Scores Board", CustomFont.TITLE_SIZE);
+        head.setBorder(BorderFactory.createLineBorder(Color.GRAY,5,true));
 
         CustomJList list = new CustomJList();
         CustomJScrollPane scrollPane = new CustomJScrollPane(list);
         MenuBackgroundPanel menuBackgroundPanel = new MenuBackgroundPanel(scrollPane);
 
         JPanel panel = new JPanel(new FlowLayout());
+        panel.setBorder(BorderFactory.createLineBorder(Color.GRAY,5,true));
 
         panel.setBackground(Color.BLACK);
 

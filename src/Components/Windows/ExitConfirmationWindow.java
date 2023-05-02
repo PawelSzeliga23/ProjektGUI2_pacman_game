@@ -2,6 +2,7 @@ package Components.Windows;
 
 import Components.CustomButton;
 import Components.CustomFont;
+import Components.CustomJLabel;
 import Controllers.SoundController;
 
 import javax.swing.*;
@@ -21,10 +22,7 @@ public class ExitConfirmationWindow extends JFrame {
         JPanel confirmationButtonsPanel = new JPanel(new FlowLayout());
         confirmationButtonsPanel.setBackground(Color.BLACK);
 
-        JLabel questionText = new JLabel("Are you sure you wont to exit?");
-        questionText.setForeground(Color.YELLOW);
-        questionText.setFont(CustomFont.getFont(CustomFont.NORMAL_SIZE));
-        questionText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        CustomJLabel questionText = new CustomJLabel("Are you sure you want to leave?",CustomFont.NORMAL_SIZE);
 
         CustomButton yesButton = new CustomButton("Yes");
         CustomButton noButton = new CustomButton("No");

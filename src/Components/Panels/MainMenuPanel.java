@@ -2,8 +2,10 @@ package Components.Panels;
 
 import Components.CustomButton;
 import Components.CustomFont;
+import Components.CustomJLabel;
 import Components.Windows.ExitConfirmationWindow;
 import Components.Windows.HighScoreWindow;
+import Components.Windows.SizeSetterWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +18,7 @@ public class MainMenuPanel extends JPanel {
         actualFrame = jFrame;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.BLACK);
+        setBorder(BorderFactory.createLineBorder(Color.GRAY,5,true));
 
         CustomButton newGameButton = new CustomButton("New Game");
         CustomButton highScoresButton = new CustomButton("High Scores");
@@ -25,10 +28,7 @@ public class MainMenuPanel extends JPanel {
         highScoresButton.setAlignmentX(CENTER_ALIGNMENT);
         exitButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        JLabel title = new JLabel("PJATKMAN");
-        title.setForeground(Color.YELLOW);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(CustomFont.getFont(CustomFont.TITLE_SIZE));
+        CustomJLabel title = new CustomJLabel("PJATKMAN", CustomFont.TITLE_SIZE);
 
         add(title);
         add(Box.createVerticalStrut(100));
@@ -39,6 +39,11 @@ public class MainMenuPanel extends JPanel {
         add(exitButton);
 
         setPreferredSize(preferredSize);
+
+        newGameButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
+            new SizeSetterWindow(actualFrame);
+        }));
+
         highScoresButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
             actualFrame.setEnabled(false);
             new HighScoreWindow(actualFrame);

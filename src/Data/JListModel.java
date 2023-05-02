@@ -27,5 +27,6 @@ public class JListModel extends AbstractListModel {
     }
     public void removePlayer(int index){
         playersLeaderBoard.remove(index);
+        fireIntervalRemoved(this,index,index);
     }
 }
