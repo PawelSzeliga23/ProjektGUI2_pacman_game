@@ -3,6 +3,7 @@ package Components.Windows;
 import Components.CustomButton;
 import Components.CustomFont;
 import Components.CustomJLabel;
+import Controllers.SoundController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,12 @@ public class SizeSetterWindow extends JFrame {
 
         CustomButton backButton = new CustomButton("Back");
         CustomButton startGame = new CustomButton("Start");
+
+        backButton.addActionListener(e -> {
+            SoundController.clickSound();
+            mainMenu.setEnabled(true);
+            this.dispose();
+        });
 
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.add(backButton);

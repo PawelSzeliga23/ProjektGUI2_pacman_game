@@ -1,5 +1,6 @@
 package Data;
 
+import Controllers.FileStreamController;
 import Controllers.PlayerComparator;
 
 import javax.swing.*;
@@ -23,10 +24,13 @@ public class JListModel extends AbstractListModel {
     }
     public void addPlayer(Player player){
         playersLeaderBoard.add(player);
-        playersLeaderBoard.sort(new PlayerComparator());
+        playersLeaderBoard.sort(new PlayerComparator().reversed());
+        FileStreamController.writeFile(playersLeaderBoard);
+        fireIntervalAdded(this, getSize(),getSize());
     }
     public void removePlayer(int index){
         playersLeaderBoard.remove(index);
+        FileStreamController.writeFile(playersLeaderBoard);
         fireIntervalRemoved(this,index,index);
     }
 }

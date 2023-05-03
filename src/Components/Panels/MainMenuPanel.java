@@ -41,6 +41,7 @@ public class MainMenuPanel extends JPanel {
         setPreferredSize(preferredSize);
 
         newGameButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
+            actualFrame.setEnabled(false);
             new SizeSetterWindow(actualFrame);
         }));
 

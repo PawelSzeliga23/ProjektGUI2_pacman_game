@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HighScoreWindow extends JFrame {
-    public HighScoreWindow(JFrame mainMenu) throws HeadlessException {
+    public HighScoreWindow(JFrame mainMenu) {
         setTitle("High Scores");
         HighScorePanel highScorePanel = new HighScorePanel(mainMenu, this);
         add(highScorePanel);

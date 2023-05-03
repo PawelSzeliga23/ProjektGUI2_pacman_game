@@ -17,10 +17,10 @@ public class CustomListCellRenderer extends JLabel implements ListCellRenderer {
         setForeground(Color.YELLOW);
         setOpaque(false);
 
-        if (index == 0){
+        if (index == 0) {
             setText("Number  Name  Score");
-        }else {
-            setText(index + ". " + player.getName() + " " + player.getScore());
+        } else {
+            setText(index + ". " + player.getName() + " " + player.getScore() + " pt");
 
             if (isSelected) {
                 setForeground(new Color(255, 196, 17, 255));

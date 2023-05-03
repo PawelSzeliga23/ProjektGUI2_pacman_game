@@ -3,15 +3,20 @@ package Components.Windows;
 import Components.CustomButton;
 import Components.CustomFont;
 import Components.CustomJLabel;
+import Components.CustomJList;
 import Controllers.SoundController;
+import Data.JListModel;
+import Data.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ExitConfirmationWindow extends JFrame {
-
-    public ExitConfirmationWindow(JFrame mainMenu) {
+public class ScoreRemoveConfirmationWindow extends JFrame {
+    public ScoreRemoveConfirmationWindow(JFrame highScoreWindow, CustomJList list, int index) {
         setTitle(":(");
+
+        JListModel model = (JListModel) list.getModel();
+        Player player = (Player) model.getElementAt(index);
 
         JPanel confirmationPanel = new JPanel();
         confirmationPanel.setBackground(Color.BLACK);
@@ -20,34 +25,38 @@ public class ExitConfirmationWindow extends JFrame {
         JPanel confirmationButtonsPanel = new JPanel(new FlowLayout());
         confirmationButtonsPanel.setBackground(Color.BLACK);
 
-        CustomJLabel questionText = new CustomJLabel("Are you sure you want to leave?",CustomFont.NORMAL_SIZE);
+        CustomJLabel questionText = new CustomJLabel("Are you sure you want to remove:", CustomFont.NORMAL_SIZE);
+        CustomJLabel playerScore = new CustomJLabel(player.getName() + " " + player.getScore() + " pt", CustomFont.NORMAL_SIZE);
 
         CustomButton yesButton = new CustomButton("Yes");
         CustomButton noButton = new CustomButton("No");
 
         yesButton.addActionListener(e -> {
+            highScoreWindow.setEnabled(true);
             SoundController.clickSound();
+            model.removePlayer(index);
             dispose();
-            mainMenu.dispose();
         });
 
         noButton.addActionListener(e -> {
-            mainMenu.setEnabled(true);
+            highScoreWindow.setEnabled(true);
             SoundController.clickSound();
             dispose();
         });
 
-        confirmationPanel.add(questionText);
         confirmationButtonsPanel.add(yesButton);
         confirmationButtonsPanel.add(noButton);
+
+        confirmationPanel.add(questionText);
+        confirmationPanel.add(playerScore);
         confirmationPanel.add(confirmationButtonsPanel);
 
         add(confirmationPanel);
 
         pack();
-        setLocationRelativeTo(mainMenu);
+        setLocationRelativeTo(highScoreWindow);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(900,120));
+        setMinimumSize(new Dimension(900, 120));
         setResizable(false);
         setVisible(true);
     }
