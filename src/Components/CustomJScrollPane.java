@@ -1,6 +1,6 @@
 package Components;
 
-import Content.CustomScrollBarUI;
+import Data.CustomScrollBarUI;
 
 import javax.swing.*;
 import java.awt.*;

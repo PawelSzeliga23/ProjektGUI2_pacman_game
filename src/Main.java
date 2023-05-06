@@ -1,5 +1,6 @@
 import Components.Windows.MainMenuWindow;
 import Controllers.FileStreamController;
+import Controllers.LevelGenerator;
 import Data.Player;
 
 import javax.swing.*;

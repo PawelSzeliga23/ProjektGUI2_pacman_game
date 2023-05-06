@@ -1,5 +1,7 @@
 package Components.Panels;
 
+import Controllers.ImageLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -21,14 +23,13 @@ public class MenuBackgroundPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         BufferedImage mainBackground = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = mainBackground.createGraphics();
-        Image image = new ImageIcon("src/Content/Images/MenuBackground.png").getImage();
 
-        double x = (double) getWidth() / image.getWidth(null);
-        double y = (double) getHeight() / image.getHeight(null);
+        double x = (double) getWidth() / ImageLoader.backgroundImage.getWidth(null);
+        double y = (double) getHeight() / ImageLoader.backgroundImage.getHeight(null);
 
         AffineTransform transform = AffineTransform.getScaleInstance(x, y);
 
-        graphics2D.drawImage(image, transform, null);
+        graphics2D.drawImage(ImageLoader.backgroundImage, transform, null);
 
         g.drawImage(mainBackground, 0, 0, null);
     }
