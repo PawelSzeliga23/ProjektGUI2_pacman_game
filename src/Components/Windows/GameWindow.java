@@ -4,6 +4,7 @@ import Components.CustomJTable;
 import Components.Panels.HeartPanel;
 import Components.Panels.MenuBackgroundPanel;
 import Components.Panels.ScorePanel;
+import Controllers.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,8 @@ public class GameWindow extends JFrame {
         Action dispose = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameController.gameIsRunning = false;
+                table.getGameController().interrupt();
                 getContentPane().removeAll();
                 dispose();
                 SwingUtilities.invokeLater(MainMenuWindow::new);

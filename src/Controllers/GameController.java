@@ -4,7 +4,7 @@ import Components.CustomJTable;
 import Components.Panels.ScorePanel;
 
 public class GameController extends Thread {
-    public static boolean gameIsRunning = true;
+    public static boolean gameIsRunning;
     CustomJTable table;
     KeyHandler keyHandler;
     private int heroPositionX;
@@ -13,6 +13,7 @@ public class GameController extends Thread {
 
 
     public GameController(CustomJTable table, KeyHandler keyHandler) {
+        GameController.gameIsRunning = true;
         this.animation = 0;
         this.table = table;
         this.keyHandler = keyHandler;
@@ -26,10 +27,7 @@ public class GameController extends Thread {
                 }
             }
         }
-        System.out.println(heroPositionX);
-        System.out.println(heroPositionY);
         table.setValueAt(102, heroPositionY, heroPositionX);
-        System.out.println(table.getValueAt(heroPositionY, heroPositionX));
     }
 
     public void update() {
@@ -76,7 +74,7 @@ public class GameController extends Thread {
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println("gameController ended");
             }
         }
     }

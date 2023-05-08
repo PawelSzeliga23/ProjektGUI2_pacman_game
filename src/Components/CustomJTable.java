@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class CustomJTable extends JTable {
     KeyHandler keyHandler;
+    GameController gameController;
 
     public CustomJTable(int sizeOfLevel) {
         keyHandler = new KeyHandler();
@@ -21,7 +22,11 @@ public class CustomJTable extends JTable {
         setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         setCellSelectionEnabled(false);
         addKeyListener(keyHandler);
-        GameController gameController = new GameController(this, keyHandler);
+        gameController = new GameController(this, keyHandler);
         gameController.start();
+    }
+
+    public GameController getGameController() {
+        return gameController;
     }
 }
