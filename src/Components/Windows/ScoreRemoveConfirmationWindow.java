@@ -16,7 +16,7 @@ public class ScoreRemoveConfirmationWindow extends JFrame {
         setTitle(":(");
 
         JListModel model = (JListModel) list.getModel();
-        Player player = (Player) model.getElementAt(index);
+        Player player = model.getElementAt(index);
 
         JPanel confirmationPanel = new JPanel();
         confirmationPanel.setBackground(Color.BLACK);

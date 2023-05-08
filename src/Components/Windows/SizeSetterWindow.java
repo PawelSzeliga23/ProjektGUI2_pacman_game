@@ -46,6 +46,8 @@ public class SizeSetterWindow extends JFrame {
 
         startGame.addActionListener(e -> SwingUtilities.invokeLater(() ->{
             new GameWindow(slider.getValue());
+            mainMenu.dispose();
+            this.dispose();
         }));
 
         buttonPanel.setBackground(Color.BLACK);

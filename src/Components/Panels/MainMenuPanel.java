@@ -46,8 +46,8 @@ public class MainMenuPanel extends JPanel {
         }));
 
         highScoresButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {
-            actualFrame.setEnabled(false);
             new HighScoreWindow(actualFrame);
+            actualFrame.dispose();
         }));
 
         exitButton.addActionListener(e -> SwingUtilities.invokeLater(() -> {

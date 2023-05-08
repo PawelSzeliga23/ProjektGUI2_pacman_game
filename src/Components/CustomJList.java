@@ -2,11 +2,12 @@ package Components;
 
 import Controllers.FileStreamController;
 import Data.JListModel;
+import Data.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CustomJList extends JList {
+public class CustomJList extends JList<Player> {
     public CustomJList() {
         setBackground(Color.BLACK);
         setModel(new JListModel(FileStreamController.readFile()));

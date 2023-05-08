@@ -6,7 +6,7 @@ import Controllers.PlayerComparator;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class JListModel extends AbstractListModel {
+public class JListModel extends AbstractListModel<Player> {
     ArrayList<Player> playersLeaderBoard;
 
     public JListModel(ArrayList<Player> playersLeaderBoard) {
@@ -19,7 +19,7 @@ public class JListModel extends AbstractListModel {
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public Player getElementAt(int index) {
         return playersLeaderBoard.get(index);
     }
     public void addPlayer(Player player){

@@ -7,7 +7,7 @@ import java.awt.*;
 public class HighScoreWindow extends JFrame {
     public HighScoreWindow(JFrame mainMenu) {
         setTitle("High Scores");
-        HighScorePanel highScorePanel = new HighScorePanel(mainMenu, this);
+        HighScorePanel highScorePanel = new HighScorePanel( this);
         add(highScorePanel);
         pack();
         setLocationRelativeTo(mainMenu);

@@ -3,7 +3,7 @@ package Data;
 import javax.swing.table.AbstractTableModel;
 
 public class JTableModel extends AbstractTableModel {
-    private int[][] level;
+    private final int[][] level;
 
     public JTableModel(int[][] level) {
         this.level = level;
@@ -24,7 +24,9 @@ public class JTableModel extends AbstractTableModel {
         return level[rowIndex][columnIndex];
     }
 
-    public int[][] getLevel() {
-        return level;
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        this.level[rowIndex][columnIndex] = (int) (aValue);
+        fireTableRowsUpdated(rowIndex, rowIndex);
     }
 }

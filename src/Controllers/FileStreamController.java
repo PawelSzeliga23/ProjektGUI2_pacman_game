@@ -17,7 +17,7 @@ public class FileStreamController {
             objectInputStream.close();
             playerLeaderBoard.sort(new PlayerComparator().reversed());
             }else {
-                playerLeaderBoard = new ArrayList<Player>();
+                playerLeaderBoard = new ArrayList<>();
             }
             return playerLeaderBoard;
         } catch (IOException | ClassNotFoundException e) {

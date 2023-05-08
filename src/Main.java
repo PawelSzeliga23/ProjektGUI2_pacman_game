@@ -1,10 +1,13 @@
 import Components.Windows.MainMenuWindow;
 import Controllers.FileStreamController;
+
 import Controllers.LevelGenerator;
 import Data.Player;
 
 import javax.swing.*;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {

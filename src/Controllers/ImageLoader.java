@@ -8,22 +8,6 @@ import java.io.IOException;
 public class ImageLoader {
 
     public static final Image backgroundImage = getBackgroundImage();
-    public static final Image cornerLD = getLeftDownCorner();
-    public static final Image cornerLU = getLeftUpCorner();
-    public static final Image cornerRD = getRightDownCorner();
-    public static final Image cornerRU = getRightUpCorner();
-    public static final Image barEndUp = getBarEndUp();
-    public static final Image barEndDown = getBarEndDown();
-    public static final Image barEndLeft = getBarEndLeft();
-    public static final Image barEndRight = getBarEndRight();
-    public static final Image horizontalBar = getHorizontalBar();
-    public static final Image verticalBar = getVerticalBar();
-    public static final Image threeWayIntersectionUp = getThreeWayIntersectionUp();
-    public static final Image threeWayIntersectionDown = getThreeWayIntersectionDown();
-    public static final Image threeWayIntersectionLeft = getThreeWayIntersectionLeft();
-    public static final Image threeWayIntersectionRight = getThreeWayIntersectionRight();
-    public static final Image dot = getDot();
-    public static final Image fourWayIntersection = getFourWayIntersection();
 
     public static Image getBackgroundImage() {
         try {
@@ -160,4 +144,93 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+
+    public static Image getFullHeart() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/full_heart.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getEmptyHeart() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/empty_heart.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManClosedRight() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManClosedRight.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManClosedUp() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManClosedUp.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManClosedDown() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManClosedDown.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManClosedLeft() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManClosedLeft.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManOpenRight() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManOpenRight.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManOpenUp() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManOpenUp.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManOpenLeft() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManOpenLeft.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getPacManOpenDown() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/PacManOpenDown.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getCoin() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/coin.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

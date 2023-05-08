@@ -2,16 +2,16 @@ package Components.Panels;
 
 import Components.*;
 import Components.Windows.IndexNotSelectedExceptionWindow;
+import Components.Windows.MainMenuWindow;
 import Components.Windows.ScoreRemoveConfirmationWindow;
 import Controllers.SoundController;
-import Data.JListModel;
 
 import javax.swing.*;
 import java.awt.*;
 
 //border factory z tego filmiku https://www.youtube.com/watch?v=Eb2QydjQvV4
 public class HighScorePanel extends JPanel {
-    public HighScorePanel(JFrame mainMenu, JFrame highScoreWindow) {
+    public HighScorePanel( JFrame highScoreWindow) {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
 
@@ -31,7 +31,7 @@ public class HighScorePanel extends JPanel {
         CustomButton deleteButton = new CustomButton("Delete Score");
 
         backButton.addActionListener(e -> {
-            mainMenu.setEnabled(true);
+            SwingUtilities.invokeLater(MainMenuWindow::new);
             SoundController.clickSound();
             highScoreWindow.dispose();
         });
