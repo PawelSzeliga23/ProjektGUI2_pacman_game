@@ -41,6 +41,10 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
         levelComponents.put(107, ImageLoader.getPacManOpenRight());
         levelComponents.put(108, ImageLoader.getPacManOpenDown());
         levelComponents.put(109, ImageLoader.getPacManOpenLeft());
+        levelComponents.put(112, ImageLoader.getBlueGhost());
+        levelComponents.put(113, ImageLoader.getPinkGhost());
+        levelComponents.put(114, ImageLoader.getOrangeGhost());
+        levelComponents.put(115, ImageLoader.getRedGhost());
     }
 
     @Override

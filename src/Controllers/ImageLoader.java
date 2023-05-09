@@ -232,5 +232,33 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+    public static Image getBlueGhost() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/blueGhost.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static Image getOrangeGhost() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/orangeGhost.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static Image getRedGhost() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/redGhost.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static Image getPinkGhost() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/pinkGhost.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

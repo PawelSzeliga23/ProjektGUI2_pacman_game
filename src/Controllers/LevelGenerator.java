@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class LevelGenerator {
@@ -72,16 +71,16 @@ public class LevelGenerator {
                 y = lastMove[1];
             }
         }
-
-        //nieparzyste spoko
         for (int value = 1; value < level.length / 2; value += 4) {
             for (int i = 0; i < level.length; i++) {
                 for (int j = 0; j < level[i].length; j++) {
+                    boolean jSmallerThanLength = j < level[i].length - value;
+                    boolean iSmallerThanLength = i < level.length - value;
                     if (
-                            (i == value && j > value - 1 && j < level[i].length - value) ||
-                                    (j == value && i > value - 1 && i < level.length - value) ||
-                                    (i == level.length - (value + 1) && j > value - 1 && j < level[i].length - value) ||
-                                    (j == level[i].length - (value + 1) && i > value - 1 && i < level.length - value)
+                            (i == value && j > value - 1 && jSmallerThanLength) ||
+                                    (j == value && i > value - 1 && iSmallerThanLength) ||
+                                    (i == level.length - (value + 1) && j > value - 1 && jSmallerThanLength) ||
+                                    (j == level[i].length - (value + 1) && i > value - 1 && iSmallerThanLength)
                     ) {
                         level[i][j] = 1;
                     }

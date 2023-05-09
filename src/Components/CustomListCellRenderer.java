@@ -18,7 +18,7 @@ public class CustomListCellRenderer extends JLabel implements ListCellRenderer<P
         if (index == 0) {
             setText("Number  Name  Score");
         } else {
-            setText(index + ". " + value.getName() + " " + value.getScore() + " pt");
+            setText(index + ". " + value.name() + " " + value.score() + " pt");
 
             if (isSelected) {
                 setForeground(new Color(255, 196, 17, 255));

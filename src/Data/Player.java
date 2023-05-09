@@ -2,14 +2,7 @@ package Data;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
-    private final String name;
-    private final int score;
-
-    public Player(String name, int score) {
-        this.name = name;
-        this.score = score;
-    }
+public record Player(String name, int score) implements Serializable {
 
     @Override
     public String toString() {
@@ -17,13 +10,5 @@ public class Player implements Serializable {
                 "name='" + name + '\'' +
                 ", score=" + score +
                 '}';
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public String getName() {
-        return name;
     }
 }

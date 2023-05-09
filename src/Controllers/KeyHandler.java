@@ -29,7 +29,7 @@ public class KeyHandler implements KeyListener {
         int heroPositionX = hero.getHeroPositionX();
         int heroPositionY = hero.getHeroPositionY();
         switch (keyCode) {
-            case KeyEvent.VK_W -> {
+            case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 if (heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
                     upAction = true;
                     downAction = false;
@@ -37,7 +37,7 @@ public class KeyHandler implements KeyListener {
                     rightAction = false;
                 }
             }
-            case KeyEvent.VK_S -> {
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> {
                 if (heroPositionY + 1 < table.getRowCount() && (int) (table.getValueAt(heroPositionY + 1, heroPositionX)) > 98) {
                     upAction = false;
                     downAction = true;
@@ -45,7 +45,7 @@ public class KeyHandler implements KeyListener {
                     rightAction = false;
                 }
             }
-            case KeyEvent.VK_D -> {
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> {
                 if (heroPositionX + 1 >= 0 && (int) (table.getValueAt(heroPositionY, heroPositionX + 1)) > 98) {
                     upAction = false;
                     downAction = false;
@@ -53,7 +53,7 @@ public class KeyHandler implements KeyListener {
                     rightAction = true;
                 }
             }
-            case KeyEvent.VK_A -> {
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> {
                 if (heroPositionY - 1 < table.getRowCount() && (int) (table.getValueAt(heroPositionY, heroPositionX - 1)) > 98) {
                     upAction = false;
                     downAction = false;

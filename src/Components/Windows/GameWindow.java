@@ -31,7 +31,6 @@ public class GameWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GameController.gameIsRunning = false;
-                table.getGameController().interrupt();
                 getContentPane().removeAll();
                 dispose();
                 SwingUtilities.invokeLater(MainMenuWindow::new);

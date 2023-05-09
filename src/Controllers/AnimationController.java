@@ -1,6 +1,5 @@
 package Controllers;
 
-import Components.CustomJLabel;
 import Components.CustomJTable;
 import Data.Hero;
 
@@ -18,28 +17,23 @@ public class AnimationController extends Thread {
     private void animateHero() {
         int positionX = hero.getHeroPositionX();
         int positionY = hero.getHeroPositionY();
-        /*System.out.println(positionX);
-        System.out.println(positionY);*/
-        if ((int)(table.getValueAt(positionY,positionX)) > 105) {
+        if ((int) (table.getValueAt(positionY, positionX)) > 105) {
             table.setValueAt((int) (table.getValueAt(positionY, positionX)) - animationCounter, positionY, positionX);
-        } else{
+        } else {
             table.setValueAt((int) (table.getValueAt(positionY, positionX)) + animationCounter, positionY, positionX);
         }
-/*
-        System.out.println(table.getValueAt(positionY, positionX ));
-*/
     }
 
     @Override
     public synchronized void run() {
-        while (GameController.gameIsRunning){
-            System.out.println("Dupa");
+        while (GameController.gameIsRunning) {
             animateHero();
             try {
-                sleep(100);
+                sleep(150);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+        interrupt();
     }
 }

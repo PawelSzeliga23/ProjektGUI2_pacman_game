@@ -26,7 +26,7 @@ public class ScoreRemoveConfirmationWindow extends JFrame {
         confirmationButtonsPanel.setBackground(Color.BLACK);
 
         CustomJLabel questionText = new CustomJLabel("Are you sure you want to remove:", CustomFont.NORMAL_SIZE);
-        CustomJLabel playerScore = new CustomJLabel(player.getName() + " " + player.getScore() + " pt", CustomFont.NORMAL_SIZE);
+        CustomJLabel playerScore = new CustomJLabel(player.name() + " " + player.score() + " pt", CustomFont.NORMAL_SIZE);
 
         CustomButton yesButton = new CustomButton("Yes");
         CustomButton noButton = new CustomButton("No");

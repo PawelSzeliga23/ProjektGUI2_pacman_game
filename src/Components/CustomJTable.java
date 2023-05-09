@@ -1,9 +1,6 @@
 package Components;
 
-import Controllers.AnimationController;
-import Controllers.GameController;
-import Controllers.KeyHandler;
-import Controllers.LevelGenerator;
+import Controllers.*;
 import Data.Hero;
 import Data.JTableModel;
 
@@ -36,15 +33,19 @@ public class CustomJTable extends JTable {
                 }
             }
         }
+        GhostController ghostController1 = new GhostController(this,300,112,getRowCount()/2,getRowCount()/2);
+        GhostController ghostController2 = new GhostController(this,300,113,getRowCount()/2,getRowCount()/2);
+        GhostController ghostController3 = new GhostController(this,300,114,getRowCount()/2,getRowCount()/2);
+        GhostController ghostController4 = new GhostController(this,300,115,getRowCount()/2,getRowCount()/2);
         keyHandler = new KeyHandler(hero, this);
         addKeyListener(keyHandler);
-        gameController = new GameController(this, keyHandler, hero);
+        gameController = new GameController(this, keyHandler, hero, 300);
         this.animationController = new AnimationController(hero, this);
         gameController.start();
         animationController.start();
-    }
-
-    public GameController getGameController() {
-        return gameController;
+        ghostController1.start();
+        ghostController2.start();
+        ghostController3.start();
+        ghostController4.start();
     }
 }

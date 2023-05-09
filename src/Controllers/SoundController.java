@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SoundController {
-    public static void clickSound(){
+    public static void clickSound() {
         try {
             File audioFile = new File("src/Content/Audio/ClickSound.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
@@ -16,7 +16,8 @@ public class SoundController {
             throw new RuntimeException(e);
         }
     }
-    public static void errorSound(){
+
+    public static void errorSound() {
         try {
             File audioFile = new File("src/Content/Audio/ErrorSound.wav");
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
@@ -27,4 +28,17 @@ public class SoundController {
             throw new RuntimeException(e);
         }
     }
+
+    public static void chompSound() {
+        try {
+            File audioFile = new File("src/Content/Audio/pacManChomp.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip chompSound = AudioSystem.getClip();
+            chompSound.open(audioInputStream);
+            chompSound.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
