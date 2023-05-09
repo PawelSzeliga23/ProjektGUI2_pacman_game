@@ -2,77 +2,64 @@ package Controllers;
 
 import Components.CustomJTable;
 import Components.Panels.ScorePanel;
+import Data.Hero;
 
 public class GameController extends Thread {
     public static boolean gameIsRunning;
     CustomJTable table;
     KeyHandler keyHandler;
-    private int heroPositionX;
-    private int heroPositionY;
-    private int animation;
+    private final Hero hero;
 
 
-    public GameController(CustomJTable table, KeyHandler keyHandler) {
+    public GameController(CustomJTable table, KeyHandler keyHandler, Hero hero) {
         GameController.gameIsRunning = true;
-        this.animation = 0;
         this.table = table;
         this.keyHandler = keyHandler;
-        boolean foundPosition = false;
-        for (int i = 0; i < table.getRowCount() && !foundPosition; i++) {
-            for (int j = 0; j < table.getColumnCount() && !foundPosition; j++) {
-                if ((int) table.getValueAt(i, j) == 99) {
-                    heroPositionX = j;
-                    heroPositionY = i;
-                    foundPosition = true;
-                }
-            }
-        }
-        table.setValueAt(102, heroPositionY, heroPositionX);
+        this.hero = hero;
     }
 
     public void update() {
-        if (keyHandler.upAction && heroPositionY - 1 >= 0 &&
-                (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY - 1, heroPositionX )) == 99){
+        int heroPositionX = hero.getHeroPositionX();
+        int heroPositionY = hero.getHeroPositionY();
+        if (keyHandler.upAction && heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
+            if ((int) (table.getValueAt(heroPositionY - 1, heroPositionX)) == 99) {
                 ScorePanel.coinScore();
             }
             table.setValueAt(100, heroPositionY, heroPositionX);
-            table.setValueAt(102 + animation, --heroPositionY, heroPositionX);
+            table.setValueAt(102, --heroPositionY, heroPositionX);
         } else if (keyHandler.downAction && heroPositionY + 1 < table.getRowCount() &&
                 (int) (table.getValueAt(heroPositionY + 1, heroPositionX)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY + 1, heroPositionX)) == 99){
+            if ((int) (table.getValueAt(heroPositionY + 1, heroPositionX)) == 99) {
                 ScorePanel.coinScore();
             }
             table.setValueAt(100, heroPositionY, heroPositionX);
-            table.setValueAt(104 + animation, ++heroPositionY, heroPositionX);
+            table.setValueAt(104, ++heroPositionY, heroPositionX);
         } else if (keyHandler.leftAction && heroPositionX - 1 >= 0 &&
                 (int) (table.getValueAt(heroPositionY, heroPositionX - 1)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY, heroPositionX - 1)) == 99){
+            if ((int) (table.getValueAt(heroPositionY, heroPositionX - 1)) == 99) {
                 ScorePanel.coinScore();
             }
             table.setValueAt(100, heroPositionY, heroPositionX);
-            table.setValueAt(105 + animation, heroPositionY, --heroPositionX);
+            table.setValueAt(105, heroPositionY, --heroPositionX);
         } else if (keyHandler.rightAction && heroPositionY + 1 < table.getRowCount() &&
                 (int) (table.getValueAt(heroPositionY, heroPositionX + 1)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY, heroPositionX + 1)) == 99){
+            if ((int) (table.getValueAt(heroPositionY, heroPositionX + 1)) == 99) {
                 ScorePanel.coinScore();
             }
             table.setValueAt(100, heroPositionY, heroPositionX);
-            table.setValueAt(103 + animation, heroPositionY, ++heroPositionX);
+            table.setValueAt(103, heroPositionY, ++heroPositionX);
         }
+        hero.setHeroPositionX(heroPositionX);
+        hero.setHeroPositionY(heroPositionY);
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         while (gameIsRunning) {
+            System.out.println("Kupa");
             update();
-            if (animation == 0) {
-                animation = 4;
-            } else {
-                animation = 0;
-            }
             try {
-                Thread.sleep(200);
+                sleep(300);
             } catch (InterruptedException e) {
                 System.out.println("gameController ended");
             }

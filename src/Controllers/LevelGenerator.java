@@ -5,28 +5,23 @@ import java.util.Stack;
 
 public class LevelGenerator {
     public static int[][] generateLevel(int size) {
-        int sizeModifier = size % 2 + 1;
-
-        int[][] level = new int[size][size];
+        int[][] level;
+        if (size % 2 == 0) {
+            level = new int[size + 1][size + 1];
+        } else {
+            level = new int[size][size];
+        }
         int x, y;
 
-        if (size % 2 == 0) {
-            do {
-                x = (int) (Math.random() * size);
-            } while (x % 2 != 0);
 
-            do {
-                y = (int) (Math.random() * size);
-            } while (y % 2 != 0);
-        } else {
-            do {
-                x = (int) (Math.random() * size);
-            } while (x % 2 == 0);
+        do {
+            x = (int) (Math.random() * size);
+        } while (x % 2 == 0);
 
-            do {
-                y = (int) (Math.random() * size);
-            } while (y % 2 == 0);
-        }
+        do {
+            y = (int) (Math.random() * size);
+        } while (y % 2 == 0);
+
         System.out.println("x:" + x);
         System.out.println("y:" + y);
         Stack<int[]> movesStack = new Stack<>();
@@ -77,7 +72,9 @@ public class LevelGenerator {
                 y = lastMove[1];
             }
         }
-        for (int value = 1; value < 20; value += 4) {
+
+        //nieparzyste spoko
+        for (int value = 1; value < level.length / 2; value += 4) {
             for (int i = 0; i < level.length; i++) {
                 for (int j = 0; j < level[i].length; j++) {
                     if (
@@ -91,6 +88,7 @@ public class LevelGenerator {
                 }
             }
         }
+
         int[][] finalLevel = new int[level.length][level.length];
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[i].length; j++) {
