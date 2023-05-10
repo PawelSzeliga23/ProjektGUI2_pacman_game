@@ -19,7 +19,7 @@ public class AnimationController extends Thread {
         int positionY = hero.getHeroPositionY();
         if ((int) (table.getValueAt(positionY, positionX)) > 105) {
             table.setValueAt((int) (table.getValueAt(positionY, positionX)) - animationCounter, positionY, positionX);
-        } else {
+        } else if ((int) (table.getValueAt(positionY, positionX)) < 110){
             table.setValueAt((int) (table.getValueAt(positionY, positionX)) + animationCounter, positionY, positionX);
         }
     }

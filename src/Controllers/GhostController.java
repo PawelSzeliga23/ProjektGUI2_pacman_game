@@ -17,7 +17,7 @@ public class GhostController extends Thread {
         this.speed = speed;
         this.positionX = positionX;
         this.positionY = positionY;
-        table.setValueAt(valueColour, positionY, positionX);
+        table.setValueAt((int) table.getValueAt(positionY, positionX) + 20, positionY, positionX);
     }
 
     @Override
@@ -34,36 +34,41 @@ public class GhostController extends Thread {
     }
 
     private void update() {
-        int[] possibleMove = new int[4];
-        int counter = 0;
-        if (positionY - 1 >= 0 && (int) (table.getValueAt(positionY - 1, positionX)) > 98) {
-            possibleMove[counter++] = 0;
-        }
-        if (positionY + 1 < table.getRowCount() && (int) (table.getValueAt(positionY + 1, positionX)) > 98) {
-            possibleMove[counter++] = 1;
-        }
-        if (positionX - 1 >= 0 && (int) (table.getValueAt(positionY, positionX - 1)) > 98) {
-            possibleMove[counter++] = 2;
-        }
-        if (positionX + 1 < table.getRowCount() && (int) (table.getValueAt(positionY, positionX + 1)) > 98) {
-            possibleMove[counter++] = 3;
-        }
-        switch (possibleMove[(int) (Math.random() * counter)]) {
-            case 0 -> {
-                table.setValueAt(valueColour, --positionY, positionX);
-                table.setValueAt(99, positionY + 1, positionX);
+        int valueAtCurrentPosition = (int) table.getValueAt(positionY, positionX);
+        if (valueAtCurrentPosition < 119 && valueAtCurrentPosition > 100) {
+            GameController.gameIsRunning = false;
+        } else {
+            int[] possibleMove = new int[4];
+            int counter = 0;
+            if (positionY - 1 >= 0 && (int) (table.getValueAt(positionY - 1, positionX)) > 98) {
+                possibleMove[counter++] = 0;
             }
-            case 1 -> {
-                table.setValueAt(valueColour, ++positionY, positionX);
-                table.setValueAt(99, positionY - 1, positionX);
+            if (positionY + 1 < table.getRowCount() && (int) (table.getValueAt(positionY + 1, positionX)) > 98) {
+                possibleMove[counter++] = 1;
             }
-            case 2 -> {
-                table.setValueAt(valueColour, positionY, --positionX);
-                table.setValueAt(99, positionY, positionX + 1);
+            if (positionX - 1 >= 0 && (int) (table.getValueAt(positionY, positionX - 1)) > 98) {
+                possibleMove[counter++] = 2;
             }
-            case 3 -> {
-                table.setValueAt(valueColour, positionY, ++positionX);
-                table.setValueAt(99, positionY, positionX - 1);
+            if (positionX + 1 < table.getRowCount() && (int) (table.getValueAt(positionY, positionX + 1)) > 98) {
+                possibleMove[counter++] = 3;
+            }
+            switch (possibleMove[(int) (Math.random() * counter)]) {
+                case 0 -> {
+                    table.setValueAt((int) table.getValueAt(positionY - 1, positionX) + valueColour, --positionY, positionX);
+                    table.setValueAt(valueAtCurrentPosition - valueColour, positionY + 1, positionX);
+                }
+                case 1 -> {
+                    table.setValueAt((int) table.getValueAt(positionY + 1, positionX) + valueColour, ++positionY, positionX);
+                    table.setValueAt(valueAtCurrentPosition - valueColour, positionY - 1, positionX);
+                }
+                case 2 -> {
+                    table.setValueAt((int) table.getValueAt(positionY, positionX - 1) + valueColour, positionY, --positionX);
+                    table.setValueAt(valueAtCurrentPosition - valueColour, positionY, positionX + 1);
+                }
+                case 3 -> {
+                    table.setValueAt((int) table.getValueAt(positionY, positionX + 1) + valueColour, positionY, ++positionX);
+                    table.setValueAt(valueAtCurrentPosition - valueColour, positionY, positionX - 1);
+                }
             }
         }
     }

@@ -33,10 +33,10 @@ public class CustomJTable extends JTable {
                 }
             }
         }
-        GhostController ghostController1 = new GhostController(this,300,112,getRowCount()/2,getRowCount()/2);
-        GhostController ghostController2 = new GhostController(this,300,113,getRowCount()/2,getRowCount()/2);
-        GhostController ghostController3 = new GhostController(this,300,114,getRowCount()/2,getRowCount()/2);
-        GhostController ghostController4 = new GhostController(this,300,115,getRowCount()/2,getRowCount()/2);
+        GhostController ghostController1 = new GhostController(this,300,20,getRowCount()/2,getRowCount()/2);
+        //GhostController ghostController2 = new GhostController(this,300,22,getRowCount()/2,getRowCount()/2);
+        //GhostController ghostController3 = new GhostController(this,300,124,getRowCount()/2,getRowCount()/2);
+        //GhostController ghostController4 = new GhostController(this,300,126,getRowCount()/2,getRowCount()/2);
         keyHandler = new KeyHandler(hero, this);
         addKeyListener(keyHandler);
         gameController = new GameController(this, keyHandler, hero, 300);
@@ -44,8 +44,8 @@ public class CustomJTable extends JTable {
         gameController.start();
         animationController.start();
         ghostController1.start();
-        ghostController2.start();
-        ghostController3.start();
-        ghostController4.start();
+        //ghostController2.start();
+        //ghostController3.start();
+        //ghostController4.start();
     }
 }

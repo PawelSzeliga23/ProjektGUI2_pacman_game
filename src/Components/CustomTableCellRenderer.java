@@ -1,5 +1,6 @@
 package Components;
 
+import Controllers.GameController;
 import Controllers.ImageLoader;
 
 import javax.swing.*;
@@ -41,23 +42,30 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
         levelComponents.put(107, ImageLoader.getPacManOpenRight());
         levelComponents.put(108, ImageLoader.getPacManOpenDown());
         levelComponents.put(109, ImageLoader.getPacManOpenLeft());
-        levelComponents.put(112, ImageLoader.getBlueGhost());
-        levelComponents.put(113, ImageLoader.getPinkGhost());
-        levelComponents.put(114, ImageLoader.getOrangeGhost());
-        levelComponents.put(115, ImageLoader.getRedGhost());
+        levelComponents.put(119, ImageLoader.getBlueGhost());
+        levelComponents.put(120, ImageLoader.getBlueGhost());
+        levelComponents.put(121, ImageLoader.getPinkGhost());
+        levelComponents.put(122, ImageLoader.getPinkGhost());
+        levelComponents.put(123, ImageLoader.getOrangeGhost());
+        levelComponents.put(124, ImageLoader.getOrangeGhost());
+        levelComponents.put(125, ImageLoader.getRedGhost());
+        levelComponents.put(126, ImageLoader.getRedGhost());
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         JLabel label = new JLabel();
-        if ((int)table.getValueAt(row,column) == 100){
-            return label;
+        try {
+            if ((int) table.getValueAt(row, column) == 100) {
+                return label;
+            }
+            ImageIcon icon = new ImageIcon(levelComponents.get((Integer) value));
+
+            Image img = icon.getImage().getScaledInstance(table.getRowHeight(), table.getRowHeight(), Image.SCALE_SMOOTH);
+            label.setIcon(new ImageIcon(img));
+        }catch (NullPointerException e){
+            GameController.gameIsRunning = false;
         }
-        ImageIcon icon = new ImageIcon(levelComponents.get((Integer) value));
-
-        Image img = icon.getImage().getScaledInstance(table.getRowHeight(), table.getRowHeight(), Image.SCALE_SMOOTH);
-        label.setIcon(new ImageIcon(img));
-
         return label;
     }
 }

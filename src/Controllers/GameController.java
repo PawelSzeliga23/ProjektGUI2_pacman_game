@@ -23,40 +23,45 @@ public class GameController extends Thread {
     public void update() {
         int heroPositionX = hero.getHeroPositionX();
         int heroPositionY = hero.getHeroPositionY();
-        if (keyHandler.upAction && heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY - 1, heroPositionX)) == 99) {
-                SoundController.chompSound();
-                ScorePanel.coinScore();
+        int valueAtCurrentPosition = (int) (table.getValueAt(heroPositionY, heroPositionX));
+        if (valueAtCurrentPosition > 118) {
+            gameIsRunning = false;
+        } else {
+            if (keyHandler.upAction && heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
+                if ((int) (table.getValueAt(heroPositionY - 1, heroPositionX)) == 99) {
+                    SoundController.chompSound();
+                    ScorePanel.coinScore();
+                }
+                table.setValueAt(102, --heroPositionY, heroPositionX);
+                table.setValueAt(100, heroPositionY + 1, heroPositionX);
+            } else if (keyHandler.downAction && heroPositionY + 1 < table.getRowCount() &&
+                    (int) (table.getValueAt(heroPositionY + 1, heroPositionX)) > 98) {
+                if ((int) (table.getValueAt(heroPositionY + 1, heroPositionX)) == 99) {
+                    SoundController.chompSound();
+                    ScorePanel.coinScore();
+                }
+                table.setValueAt(104, ++heroPositionY, heroPositionX);
+                table.setValueAt(100, heroPositionY - 1, heroPositionX);
+            } else if (keyHandler.leftAction && heroPositionX - 1 >= 0 &&
+                    (int) (table.getValueAt(heroPositionY, heroPositionX - 1)) > 98) {
+                if ((int) (table.getValueAt(heroPositionY, heroPositionX - 1)) == 99) {
+                    SoundController.chompSound();
+                    ScorePanel.coinScore();
+                }
+                table.setValueAt(105, heroPositionY, --heroPositionX);
+                table.setValueAt(100, heroPositionY, heroPositionX + 1);
+            } else if (keyHandler.rightAction && heroPositionY + 1 < table.getRowCount() &&
+                    (int) (table.getValueAt(heroPositionY, heroPositionX + 1)) > 98) {
+                if ((int) (table.getValueAt(heroPositionY, heroPositionX + 1)) == 99) {
+                    SoundController.chompSound();
+                    ScorePanel.coinScore();
+                }
+                table.setValueAt(103, heroPositionY, ++heroPositionX);
+                table.setValueAt(100, heroPositionY, heroPositionX - 1);
             }
-            table.setValueAt(102, --heroPositionY, heroPositionX);
-            table.setValueAt(100, heroPositionY + 1, heroPositionX);
-        } else if (keyHandler.downAction && heroPositionY + 1 < table.getRowCount() &&
-                (int) (table.getValueAt(heroPositionY + 1, heroPositionX)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY + 1, heroPositionX)) == 99) {
-                SoundController.chompSound();
-                ScorePanel.coinScore();
-            }
-            table.setValueAt(104, ++heroPositionY, heroPositionX);
-            table.setValueAt(100, heroPositionY - 1, heroPositionX);
-        } else if (keyHandler.leftAction && heroPositionX - 1 >= 0 &&
-                (int) (table.getValueAt(heroPositionY, heroPositionX - 1)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY, heroPositionX - 1)) == 99) {
-                SoundController.chompSound();
-                ScorePanel.coinScore();
-            }
-            table.setValueAt(105, heroPositionY, --heroPositionX);
-            table.setValueAt(100, heroPositionY, heroPositionX + 1);
-        } else if (keyHandler.rightAction && heroPositionY + 1 < table.getRowCount() &&
-                (int) (table.getValueAt(heroPositionY, heroPositionX + 1)) > 98) {
-            if ((int) (table.getValueAt(heroPositionY, heroPositionX + 1)) == 99) {
-                SoundController.chompSound();
-                ScorePanel.coinScore();
-            }
-            table.setValueAt(103, heroPositionY, ++heroPositionX);
-            table.setValueAt(100, heroPositionY, heroPositionX - 1);
+            hero.setHeroPositionX(heroPositionX);
+            hero.setHeroPositionY(heroPositionY);
         }
-        hero.setHeroPositionX(heroPositionX);
-        hero.setHeroPositionY(heroPositionY);
     }
 
     @Override
