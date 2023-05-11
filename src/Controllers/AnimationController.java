@@ -1,22 +1,21 @@
 package Controllers;
 
 import Components.CustomJTable;
-import Data.Hero;
 
 public class AnimationController extends Thread {
     int animationCounter;
-    Hero hero;
+    HeroController heroController;
     CustomJTable table;
 
-    public AnimationController(Hero hero, CustomJTable table) {
+    public AnimationController(HeroController heroController, CustomJTable table) {
         this.animationCounter = 4;
-        this.hero = hero;
+        this.heroController = heroController;
         this.table = table;
     }
 
     private void animateHero() {
-        int positionX = hero.getHeroPositionX();
-        int positionY = hero.getHeroPositionY();
+        int positionX = heroController.getHeroPositionX();
+        int positionY = heroController.getHeroPositionY();
         if ((int) (table.getValueAt(positionY, positionX)) > 105) {
             table.setValueAt((int) (table.getValueAt(positionY, positionX)) - animationCounter, positionY, positionX);
         } else if ((int) (table.getValueAt(positionY, positionX)) < 110){

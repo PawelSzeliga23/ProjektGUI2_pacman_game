@@ -1,80 +1,49 @@
 package Controllers;
 
 import Components.CustomJTable;
-import Components.Panels.ScorePanel;
-import Data.Hero;
 
 public class GameController extends Thread {
-    public static boolean gameIsRunning;
+    public static boolean gameIsRunning = true;
     CustomJTable table;
-    KeyHandler keyHandler;
-    private final Hero hero;
-    public long speed;
+    HeroController heroController;
+    AnimationController animationController;
+    GhostController ghostController1;
+    GhostController ghostController2;
+    GhostController ghostController3;
+    GhostController ghostController4;
 
-
-    public GameController(CustomJTable table, KeyHandler keyHandler, Hero hero, long speed) {
-        GameController.gameIsRunning = true;
+    public GameController(CustomJTable table) {
         this.table = table;
-        this.keyHandler = keyHandler;
-        this.hero = hero;
-        this.speed = speed;
+        this.heroController = new HeroController(this, table, 1, 1, 280);
+        this.animationController = new AnimationController(heroController, table);
+        this.ghostController1 = new GhostController(this, table, 300, 120, table.getRowCount() / 2, table.getColumnCount() / 2);
+        this.ghostController2 = new GhostController(this, table, 300, 122, 1, table.getColumnCount() - 2);
+        this.ghostController3 = new GhostController(this, table, 300, 124, table.getRowCount() - 2, 1);
+        this.ghostController4 = new GhostController(this, table, 300, 126, table.getRowCount() - 2, table.getColumnCount() - 2);
+
     }
 
-    public void update() {
-        int heroPositionX = hero.getHeroPositionX();
-        int heroPositionY = hero.getHeroPositionY();
-        int valueAtCurrentPosition = (int) (table.getValueAt(heroPositionY, heroPositionX));
-        if (valueAtCurrentPosition > 118) {
-            gameIsRunning = false;
-        } else {
-            if (keyHandler.upAction && heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
-                if ((int) (table.getValueAt(heroPositionY - 1, heroPositionX)) == 99) {
-                    SoundController.chompSound();
-                    ScorePanel.coinScore();
-                }
-                table.setValueAt(102, --heroPositionY, heroPositionX);
-                table.setValueAt(100, heroPositionY + 1, heroPositionX);
-            } else if (keyHandler.downAction && heroPositionY + 1 < table.getRowCount() &&
-                    (int) (table.getValueAt(heroPositionY + 1, heroPositionX)) > 98) {
-                if ((int) (table.getValueAt(heroPositionY + 1, heroPositionX)) == 99) {
-                    SoundController.chompSound();
-                    ScorePanel.coinScore();
-                }
-                table.setValueAt(104, ++heroPositionY, heroPositionX);
-                table.setValueAt(100, heroPositionY - 1, heroPositionX);
-            } else if (keyHandler.leftAction && heroPositionX - 1 >= 0 &&
-                    (int) (table.getValueAt(heroPositionY, heroPositionX - 1)) > 98) {
-                if ((int) (table.getValueAt(heroPositionY, heroPositionX - 1)) == 99) {
-                    SoundController.chompSound();
-                    ScorePanel.coinScore();
-                }
-                table.setValueAt(105, heroPositionY, --heroPositionX);
-                table.setValueAt(100, heroPositionY, heroPositionX + 1);
-            } else if (keyHandler.rightAction && heroPositionY + 1 < table.getRowCount() &&
-                    (int) (table.getValueAt(heroPositionY, heroPositionX + 1)) > 98) {
-                if ((int) (table.getValueAt(heroPositionY, heroPositionX + 1)) == 99) {
-                    SoundController.chompSound();
-                    ScorePanel.coinScore();
-                }
-                table.setValueAt(103, heroPositionY, ++heroPositionX);
-                table.setValueAt(100, heroPositionY, heroPositionX - 1);
-            }
-            hero.setHeroPositionX(heroPositionX);
-            hero.setHeroPositionY(heroPositionY);
-        }
+    public GhostController getGhostController1() {
+        return ghostController1;
     }
 
-    @Override
-    public synchronized void run() {
-        while (gameIsRunning) {
-            update();
-            try {
-                sleep(speed);
-            } catch (InterruptedException e) {
-                System.out.println("gameController ended");
-            }
-        }
-        System.out.println("end");
-        interrupt();
+    public GhostController getGhostController2() {
+        return ghostController2;
+    }
+
+    public GhostController getGhostController3() {
+        return ghostController3;
+    }
+
+    public GhostController getGhostController4() {
+        return ghostController4;
+    }
+
+    public void start() {
+        heroController.start();
+        ghostController1.start();
+        ghostController2.start();
+        ghostController3.start();
+        ghostController4.start();
     }
 }

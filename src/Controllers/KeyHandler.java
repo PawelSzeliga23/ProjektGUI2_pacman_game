@@ -1,7 +1,6 @@
 package Controllers;
 
 import Components.CustomJTable;
-import Data.Hero;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,11 +10,11 @@ public class KeyHandler implements KeyListener {
     public boolean downAction;
     public boolean leftAction;
     public boolean rightAction;
-    private final Hero hero;
+    private final HeroController heroController;
     private final CustomJTable table;
 
-    public KeyHandler(Hero hero, CustomJTable table) {
-        this.hero = hero;
+    public KeyHandler(HeroController heroController, CustomJTable table) {
+        this.heroController = heroController;
         this.table = table;
     }
 
@@ -26,8 +25,8 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        int heroPositionX = hero.getHeroPositionX();
-        int heroPositionY = hero.getHeroPositionY();
+        int heroPositionX = heroController.getHeroPositionX();
+        int heroPositionY = heroController.getHeroPositionY();
         switch (keyCode) {
             case KeyEvent.VK_W, KeyEvent.VK_UP -> {
                 if (heroPositionY - 1 >= 0 && (int) (table.getValueAt(heroPositionY - 1, heroPositionX)) > 98) {
