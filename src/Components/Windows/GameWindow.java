@@ -5,6 +5,7 @@ import Components.Panels.HeartPanel;
 import Components.Panels.MenuBackgroundPanel;
 import Components.Panels.ScorePanel;
 import Controllers.GameController;
+import Controllers.SoundController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ public class GameWindow extends JFrame {
         Action dispose = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SoundController.stopGameMusic();
                 GameController.gameIsRunning = false;
                 getContentPane().removeAll();
                 dispose();

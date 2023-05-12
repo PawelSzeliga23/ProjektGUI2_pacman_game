@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class SoundController {
+    private static Clip mainMenuMusic;
+    private static Clip gameMusic;
+
     public static void clickSound() {
         try {
             File audioFile = new File("src/Content/Audio/ClickSound.wav");
@@ -41,4 +44,37 @@ public class SoundController {
         }
     }
 
+    public static void mainMenuMusic() {
+        try {
+            File audioFile = new File("src/Content/Audio/MainMenuMusic.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+            mainMenuMusic = AudioSystem.getClip();
+            mainMenuMusic.open(audioInputStream);
+            mainMenuMusic.loop(20);
+            mainMenuMusic.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void stopMainMenuMusic() {
+        mainMenuMusic.stop();
+    }
+
+    public static void gameMusic() {
+        try {
+            File audioFile = new File("src/Content/Audio/GameMusic.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+            gameMusic = AudioSystem.getClip();
+            gameMusic.open(audioInputStream);
+            gameMusic.loop(20);
+            gameMusic.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void stopGameMusic() {
+        gameMusic.stop();
+    }
 }

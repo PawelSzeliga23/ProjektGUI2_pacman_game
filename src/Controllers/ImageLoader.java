@@ -232,6 +232,7 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+
     public static Image getBlueGhost() {
         try {
             return ImageIO.read((new File("src/Content/Icons/blueGhost.png")));
@@ -239,6 +240,7 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+
     public static Image getOrangeGhost() {
         try {
             return ImageIO.read((new File("src/Content/Icons/orangeGhost.png")));
@@ -246,6 +248,7 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+
     public static Image getRedGhost() {
         try {
             return ImageIO.read((new File("src/Content/Icons/redGhost.png")));
@@ -253,9 +256,41 @@ public class ImageLoader {
             throw new RuntimeException(e);
         }
     }
+
     public static Image getPinkGhost() {
         try {
             return ImageIO.read((new File("src/Content/Icons/pinkGhost.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getFreeze() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/Freeze.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getCoinX2() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/CoinX2.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Image getBanana() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/Banana.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static Image getFlash() {
+        try {
+            return ImageIO.read((new File("src/Content/Icons/Flash.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

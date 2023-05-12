@@ -20,12 +20,14 @@ public class GameController extends Thread {
     GhostController ghostController2;
     GhostController ghostController3;
     GhostController ghostController4;
+    private boolean coinX2Active;
 
     public GameController(CustomJTable table, int coinCounter, JFrame currentFrame) {
         gameIsRunning = true;
         this.currentFrame = currentFrame;
         this.heartCounter = 4;
         this.coinCounter = coinCounter - 1;
+        this.coinX2Active = false;
         this.table = table;
         this.heroController = new HeroController(this, table, 1, 1, 280);
         this.animationController = new AnimationController(heroController, table);
@@ -59,27 +61,52 @@ public class GameController extends Thread {
         ghostController3.start();
         ghostController4.start();
     }
-    public void heroDies(){
+
+    public void heroDies() {
         heroController.setDefaultPositions();
         ghostController1.setDefaultPositions();
         ghostController2.setDefaultPositions();
         ghostController3.setDefaultPositions();
         ghostController4.setDefaultPositions();
         HeartPanel.emptyHeartSlot(heartCounter--);
-        if (heartCounter == -1){
+        if (heartCounter == -1) {
+            SoundController.stopGameMusic();
             gameIsRunning = false;
-            SwingUtilities.invokeLater(() -> new LossGameWindow(table.getRowCount(),currentFrame));
+            SwingUtilities.invokeLater(() -> new LossGameWindow(table.getRowCount(), currentFrame));
         }
     }
-    public void heroGetsCoin(){
+
+    public void heroGetsCoin() {
         SoundController.chompSound();
-        ScorePanel.coinScore();
+        if (coinX2Active) {
+            ScorePanel.coinX2Score();
+        } else {
+            ScorePanel.coinScore();
+        }
         coinCounter--;
-        if (coinCounter == 0){
+        if (coinCounter == 0) {
+            SoundController.stopGameMusic();
             gameIsRunning = false;
             SwingUtilities.invokeLater(() -> {
                 new WinGameWindow(currentFrame);
             });
         }
+    }
+
+    public void superPowerResp() {
+        coinCounter--;
+    }
+
+    public void heroGetsBanana() {
+        SoundController.chompSound();
+        ScorePanel.bananaScore();
+    }
+
+    public void coinX2Activate() {
+        coinX2Active = true;
+    }
+
+    public void coinX2Deactivate() {
+        coinX2Active = false;
     }
 }

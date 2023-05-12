@@ -85,6 +85,7 @@ public class LevelGenerator {
                 }
             }
         }
+
         int counter = 0;
         int[][] finalLevel = new int[level.length][level.length];
         for (int i = 0; i < level.length; i++) {
@@ -111,7 +112,7 @@ public class LevelGenerator {
                 }
             }
         }
-        int[][][] mazeAndCounter = new int[][][]{finalLevel,{{counter}}};
+        int[][][] mazeAndCounter = new int[][][]{finalLevel, {{counter}}};
         return mazeAndCounter;
     }
 }

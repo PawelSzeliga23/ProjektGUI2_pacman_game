@@ -1,19 +1,10 @@
 import Components.Windows.MainMenuWindow;
-import Controllers.FileStreamController;
-
-import Controllers.LevelGenerator;
-import Data.Player;
+import Controllers.SoundController;
 
 import javax.swing.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MainMenuWindow::new);
-        ArrayList<Player> arrayList = new ArrayList<>();
-        arrayList.add(new Player("a",Integer.MAX_VALUE));
-        FileStreamController.writeFile(arrayList);
     }
 }

@@ -26,6 +26,7 @@ public class ExitConfirmationWindow extends JFrame {
         CustomButton noButton = new CustomButton("No");
 
         yesButton.addActionListener(e -> {
+            SoundController.stopMainMenuMusic();
             SoundController.clickSound();
             dispose();
             mainMenu.dispose();

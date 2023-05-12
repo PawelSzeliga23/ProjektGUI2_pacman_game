@@ -45,6 +45,8 @@ public class SizeSetterWindow extends JFrame {
         });
 
         startGame.addActionListener(e -> SwingUtilities.invokeLater(() ->{
+            SoundController.stopMainMenuMusic();
+            SoundController.gameMusic();
             new GameWindow(slider.getValue());
             mainMenu.dispose();
             this.dispose();

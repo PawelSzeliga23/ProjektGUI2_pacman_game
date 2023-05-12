@@ -13,6 +13,10 @@ public class HeroController extends Thread {
     private final int defaultHeroPositionX;
     private final int defaultHeroPositionY;
     public long speed;
+    private int coinSuperPowerCounter;
+    public boolean coinSuperPowerActive;
+    private int speedSuperPowerCounter;
+    public boolean speedSuperPowerActive;
 
 
     public HeroController(GameController gameController, CustomJTable table, int heroPositionY, int heroPositionX, long speed) {
@@ -20,6 +24,10 @@ public class HeroController extends Thread {
         this.gameController = gameController;
         this.table = table;
         keyHandler = new KeyHandler(this, table);
+        this.coinSuperPowerCounter = 0;
+        this.coinSuperPowerActive = false;
+        this.speedSuperPowerCounter = 0;
+        this.speedSuperPowerActive = false;
         this.heroPositionX = heroPositionX;
         this.heroPositionY = heroPositionY;
         this.defaultHeroPositionX = heroPositionX;
@@ -31,19 +39,19 @@ public class HeroController extends Thread {
     public void update() {
         if (possibleMoveUp()) {
             int[] direction = new int[]{-1, 0};
-            if(actionChecker(direction))
+            if (actionChecker(direction))
                 setNewPosition(direction, 102);
         } else if (possibleMoveDown()) {
             int[] direction = new int[]{+1, 0};
-            if(actionChecker(direction))
+            if (actionChecker(direction))
                 setNewPosition(direction, 104);
         } else if (possibleMoveLeft()) {
             int[] direction = new int[]{0, -1};
-            if(actionChecker(direction))
+            if (actionChecker(direction))
                 setNewPosition(direction, 105);
         } else if (possibleMoveRight()) {
             int[] direction = new int[]{0, +1};
-            if(actionChecker(direction))
+            if (actionChecker(direction))
                 setNewPosition(direction, 103);
         }
     }
@@ -53,6 +61,22 @@ public class HeroController extends Thread {
     public synchronized void run() {
         while (GameController.gameIsRunning) {
             update();
+            if (coinSuperPowerActive) {
+                coinSuperPowerCounter++;
+            }
+            if (coinSuperPowerCounter == 17) {
+                gameController.coinX2Deactivate();
+                coinSuperPowerCounter = 0;
+                coinSuperPowerActive = false;
+            }
+            if (speedSuperPowerActive) {
+                speedSuperPowerCounter++;
+            }
+            if (speedSuperPowerCounter == 34) {
+                speed = speed * 2;
+                speedSuperPowerCounter = 0;
+                speedSuperPowerActive = false;
+            }
             try {
                 sleep(speed);
             } catch (InterruptedException e) {
@@ -102,12 +126,26 @@ public class HeroController extends Thread {
                 gameController.heroDies();
                 return false;
             }
+            case 130 -> {
+                gameController.heroGetsBanana();
+            }
+            case 131 -> {
+                GhostController.isFrozen = true;
+            }
+            case 132 -> {
+                coinSuperPowerActive = true;
+                gameController.coinX2Activate();
+            }
+            case 133 -> {
+                speedSuperPowerActive = true;
+                speed = speed / 2;
+            }
         }
         return true;
     }
 
     public void setDefaultPositions() {
-        table.setValueAt(100,heroPositionY,heroPositionX);
+        table.setValueAt(100, heroPositionY, heroPositionX);
         heroPositionY = defaultHeroPositionY;
         heroPositionX = defaultHeroPositionX;
         table.setValueAt(103, defaultHeroPositionY, defaultHeroPositionX);

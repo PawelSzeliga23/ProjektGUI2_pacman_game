@@ -6,6 +6,7 @@ import Components.CustomJLabel;
 import Components.Windows.ExitConfirmationWindow;
 import Components.Windows.HighScoreWindow;
 import Components.Windows.SizeSetterWindow;
+import Controllers.SoundController;
 
 import javax.swing.*;
 import java.awt.*;

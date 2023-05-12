@@ -4,6 +4,7 @@ import Components.CustomJTable;
 
 public class GhostController extends Thread {
     private boolean isAlive;
+    public static boolean isFrozen = false;
     GameController gameController;
     CustomJTable table;
     private long speed;
@@ -14,6 +15,7 @@ public class GhostController extends Thread {
     private final int valueColour;
     private int valueUnderCurrentPosition;
     private int temporaryValue;
+    private int superPowerCounter;
 
     public GhostController(GameController gameController, CustomJTable table, long speed, int valueColour, int positionX, int positionY) {
         this.gameController = gameController;
@@ -21,6 +23,7 @@ public class GhostController extends Thread {
         this.isAlive = true;
         this.table = table;
         this.speed = speed;
+        this.superPowerCounter = 0;
         this.positionX = positionX;
         this.positionY = positionY;
         defaultPositionX = positionX;
@@ -33,6 +36,15 @@ public class GhostController extends Thread {
     public void run() {
         while (GameController.gameIsRunning) {
             update();
+            superPowerCounter++;
+            if (isFrozen){
+                try {
+                    sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                isFrozen = false;
+            }
             try {
                 sleep(speed);
             } catch (InterruptedException e) {
@@ -101,7 +113,15 @@ public class GhostController extends Thread {
 
     private synchronized boolean getValue(int[] direction) {
         int tempValue = (int) table.getValueAt(positionY + direction[0], positionX + direction[1]);
-        if (tempValue == 99) {
+        if (superPowerCounter == 17) {
+            int[] possibleSuperPower = new int[]{130, 131, 132, 133};
+            if (Math.random() <= 0.12) {
+                temporaryValue = possibleSuperPower[(int) (Math.random() * possibleSuperPower.length)];
+                gameController.superPowerResp();
+            }
+            superPowerCounter = 0;
+            return true;
+        } else if (tempValue == 99) {
             temporaryValue = 99;
         } else if (tempValue == 100) {
             temporaryValue = 100;
@@ -116,6 +136,14 @@ public class GhostController extends Thread {
         } else if (tempValue > 100 && tempValue < 110) {
             gameController.heroDies();
             return false;
+        } else if (tempValue == 130) {
+            temporaryValue = 130;
+        } else if (tempValue == 131) {
+            temporaryValue = 131;
+        } else if (tempValue == 132) {
+            temporaryValue = 132;
+        } else if (tempValue == 133) {
+            temporaryValue = 133;
         }
         return true;
     }
