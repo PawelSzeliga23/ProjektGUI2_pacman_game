@@ -39,6 +39,7 @@ public class GhostController extends Thread {
                 throw new RuntimeException(e);
             }
         }
+        System.out.println("ghostEnd");
         interrupt();
     }
 
@@ -112,7 +113,7 @@ public class GhostController extends Thread {
             temporaryValue = gameController.getGhostController3().getValueUnderCurrentPosition();
         } else if (tempValue == 123) {
             temporaryValue = gameController.getGhostController4().getValueUnderCurrentPosition();
-        } else if (tempValue > 100 && tempValue < 110){
+        } else if (tempValue > 100 && tempValue < 110) {
             gameController.heroDies();
             return false;
         }
@@ -127,12 +128,13 @@ public class GhostController extends Thread {
         positionY = newPositionY;
         positionX = newPositionX;
     }
-    public synchronized void setDefaultPositions(){
-        table.setValueAt(valueUnderCurrentPosition,positionY,positionX);
+
+    public synchronized void setDefaultPositions() {
+        table.setValueAt(valueUnderCurrentPosition, positionY, positionX);
         positionY = defaultPositionY;
         positionX = defaultPositionX;
         setValueUnderDefaultPosition();
-        table.setValueAt(valueColour,defaultPositionY,defaultPositionX);
+        table.setValueAt(valueColour, defaultPositionY, defaultPositionX);
     }
 
     public int getValueUnderCurrentPosition() {
@@ -140,6 +142,6 @@ public class GhostController extends Thread {
     }
 
     private void setValueUnderDefaultPosition() {
-        valueUnderCurrentPosition = (int) table.getValueAt(positionY, positionX);
+        valueUnderCurrentPosition = (int) table.getValueAt(defaultPositionY, defaultPositionX);
     }
 }

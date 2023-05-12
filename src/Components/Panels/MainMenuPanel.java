@@ -18,7 +18,7 @@ public class MainMenuPanel extends JPanel {
         actualFrame = jFrame;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.BLACK);
-        setBorder(BorderFactory.createLineBorder(Color.GRAY,5,true));
+        setBorder(BorderFactory.createLineBorder(Color.GRAY, 5, true));
 
         CustomButton newGameButton = new CustomButton("New Game");
         CustomButton highScoresButton = new CustomButton("High Scores");

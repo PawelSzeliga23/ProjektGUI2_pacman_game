@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScorePanel extends JPanel {
-    private static int score;
+    public static int score;
     static CustomJLabel scoreLabel;
 
     public ScorePanel() {

@@ -11,6 +11,7 @@ import java.awt.*;
 
 //border factory z tego filmiku https://www.youtube.com/watch?v=Eb2QydjQvV4
 public class HighScorePanel extends JPanel {
+    public static CustomJList list = new CustomJList();
     public HighScorePanel( JFrame highScoreWindow) {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -18,7 +19,6 @@ public class HighScorePanel extends JPanel {
         CustomJLabel head = new CustomJLabel("High Scores Board", CustomFont.TITLE_SIZE);
         head.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5, true));
 
-        CustomJList list = new CustomJList();
         CustomJScrollPane scrollPane = new CustomJScrollPane(list);
         MenuBackgroundPanel menuBackgroundPanel = new MenuBackgroundPanel(scrollPane);
 
