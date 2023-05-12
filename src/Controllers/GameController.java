@@ -2,9 +2,9 @@ package Controllers;
 
 import Components.CustomJTable;
 import Components.Panels.HeartPanel;
-import Components.Panels.LossPanel;
 import Components.Panels.ScorePanel;
 import Components.Windows.LossGameWindow;
+import Components.Windows.WinGameWindow;
 
 import javax.swing.*;
 
@@ -24,7 +24,7 @@ public class GameController extends Thread {
     public GameController(CustomJTable table, int coinCounter, JFrame currentFrame) {
         gameIsRunning = true;
         this.currentFrame = currentFrame;
-        this.heartCounter = 1;
+        this.heartCounter = 4;
         this.coinCounter = coinCounter - 1;
         this.table = table;
         this.heroController = new HeroController(this, table, 1, 1, 280);
@@ -77,6 +77,9 @@ public class GameController extends Thread {
         coinCounter--;
         if (coinCounter == 0){
             gameIsRunning = false;
+            SwingUtilities.invokeLater(() -> {
+                new WinGameWindow(currentFrame);
+            });
         }
     }
 }
