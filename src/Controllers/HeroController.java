@@ -19,7 +19,7 @@ public class HeroController extends Thread {
         heroIsAlive = true;
         this.gameController = gameController;
         this.table = table;
-        keyHandler = new KeyHandler(this,table);
+        keyHandler = new KeyHandler(this, table);
         this.heroPositionX = heroPositionX;
         this.heroPositionY = heroPositionY;
         this.defaultHeroPositionX = heroPositionX;
@@ -31,20 +31,20 @@ public class HeroController extends Thread {
     public void update() {
         if (possibleMoveUp()) {
             int[] direction = new int[]{-1, 0};
-            actionChecker(direction);
-            setNewPosition(direction, 102);
+            if(actionChecker(direction))
+                setNewPosition(direction, 102);
         } else if (possibleMoveDown()) {
             int[] direction = new int[]{+1, 0};
-            actionChecker(direction);
-            setNewPosition(direction, 104);
+            if(actionChecker(direction))
+                setNewPosition(direction, 104);
         } else if (possibleMoveLeft()) {
             int[] direction = new int[]{0, -1};
-            actionChecker(direction);
-            setNewPosition(direction, 105);
+            if(actionChecker(direction))
+                setNewPosition(direction, 105);
         } else if (possibleMoveRight()) {
             int[] direction = new int[]{0, +1};
-            actionChecker(direction);
-            setNewPosition(direction, 103);
+            if(actionChecker(direction))
+                setNewPosition(direction, 103);
         }
     }
 
@@ -92,22 +92,25 @@ public class HeroController extends Thread {
         heroPositionX = newPositionX;
     }
 
-    private void actionChecker(int[] direction) {
+    private synchronized boolean actionChecker(int[] direction) {
         int nextValueInTable = (int) (table.getValueAt(heroPositionY + direction[0], heroPositionX + direction[1]));
         switch (nextValueInTable) {
             case 99 -> {
-                SoundController.chompSound();
-                ScorePanel.coinScore();
+                gameController.heroGetsCoin();
             }
-            case 120 -> {
-            }
-            case 122 -> {
-            }
-            case 124 -> {
-            }
-            case 126 -> {
+            case 120, 121, 122, 123 -> {
+                gameController.heroDies();
+                return false;
             }
         }
+        return true;
+    }
+
+    public void setDefaultPositions() {
+        table.setValueAt(100,heroPositionY,heroPositionX);
+        heroPositionY = defaultHeroPositionY;
+        heroPositionX = defaultHeroPositionX;
+        table.setValueAt(103, defaultHeroPositionY, defaultHeroPositionX);
     }
 
     public int getHeroPositionY() {
@@ -117,5 +120,6 @@ public class HeroController extends Thread {
     public int getHeroPositionX() {
         return heroPositionX;
     }
+
 }
 

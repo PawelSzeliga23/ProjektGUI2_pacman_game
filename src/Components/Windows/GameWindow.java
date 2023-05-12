@@ -21,7 +21,7 @@ public class GameWindow extends JFrame {
 
     public GameWindow(int sizeOfLevel) {
 
-        this.table = new CustomJTable(sizeOfLevel);
+        this.table = new CustomJTable(sizeOfLevel, this);
         this.backGroundPanel = new MenuBackgroundPanel(table);
         heartPanel = new HeartPanel();
         scorePanel = new ScorePanel();

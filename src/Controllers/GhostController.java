@@ -42,7 +42,7 @@ public class GhostController extends Thread {
         interrupt();
     }
 
-    private void update() {
+    private synchronized void update() {
         int[] possibleMove = new int[4];
         int counter = 0;
         if (possibleMoveUp()) {
@@ -60,45 +60,45 @@ public class GhostController extends Thread {
         switch (possibleMove[(int) (Math.random() * counter)]) {
             case 0 -> {
                 int[] direction = new int[]{-1, 0};
-                getValue(direction);
-                setValueInTable(direction);
+                if (getValue(direction))
+                    setValueInTable(direction);
             }
             case 1 -> {
                 int[] direction = new int[]{+1, 0};
-                getValue(direction);
-                setValueInTable(direction);
+                if (getValue(direction))
+                    setValueInTable(direction);
             }
             case 2 -> {
                 int[] direction = new int[]{0, -1};
-                getValue(direction);
-                setValueInTable(direction);
+                if (getValue(direction))
+                    setValueInTable(direction);
             }
             case 3 -> {
                 int[] direction = new int[]{0, +1};
-                getValue(direction);
-                setValueInTable(direction);
+                if (getValue(direction))
+                    setValueInTable(direction);
             }
         }
         valueUnderCurrentPosition = temporaryValue;
     }
 
-    private boolean possibleMoveUp() {
+    private synchronized boolean possibleMoveUp() {
         return positionY - 1 >= 0 && (int) (table.getValueAt(positionY - 1, positionX)) > 98;
     }
 
-    private boolean possibleMoveDown() {
+    private synchronized boolean possibleMoveDown() {
         return positionY - 1 >= 0 && (int) (table.getValueAt(positionY + 1, positionX)) > 98;
     }
 
-    private boolean possibleMoveRight() {
+    private synchronized boolean possibleMoveRight() {
         return positionY - 1 >= 0 && (int) (table.getValueAt(positionY, positionX + 1)) > 98;
     }
 
-    private boolean possibleMoveLeft() {
+    private synchronized boolean possibleMoveLeft() {
         return positionY - 1 >= 0 && (int) (table.getValueAt(positionY, positionX - 1)) > 98;
     }
 
-    private void getValue(int[] direction) {
+    private synchronized boolean getValue(int[] direction) {
         int tempValue = (int) table.getValueAt(positionY + direction[0], positionX + direction[1]);
         if (tempValue == 99) {
             temporaryValue = 99;
@@ -106,22 +106,33 @@ public class GhostController extends Thread {
             temporaryValue = 100;
         } else if (tempValue == 120) {
             temporaryValue = gameController.getGhostController1().getValueUnderCurrentPosition();
-        } else if (tempValue == 122) {
+        } else if (tempValue == 121) {
             temporaryValue = gameController.getGhostController2().getValueUnderCurrentPosition();
-        } else if (tempValue == 124) {
+        } else if (tempValue == 122) {
             temporaryValue = gameController.getGhostController3().getValueUnderCurrentPosition();
-        } else if (tempValue == 126) {
+        } else if (tempValue == 123) {
             temporaryValue = gameController.getGhostController4().getValueUnderCurrentPosition();
+        } else if (tempValue > 100 && tempValue < 110){
+            gameController.heroDies();
+            return false;
         }
+        return true;
     }
 
-    private void setValueInTable(int[] direction) {
+    private synchronized void setValueInTable(int[] direction) {
         int newPositionY = positionY + direction[0];
         int newPositionX = positionX + direction[1];
         table.setValueAt(valueColour, newPositionY, newPositionX);
         table.setValueAt(valueUnderCurrentPosition, positionY, positionX);
         positionY = newPositionY;
         positionX = newPositionX;
+    }
+    public synchronized void setDefaultPositions(){
+        table.setValueAt(valueUnderCurrentPosition,positionY,positionX);
+        positionY = defaultPositionY;
+        positionX = defaultPositionX;
+        setValueUnderDefaultPosition();
+        table.setValueAt(valueColour,defaultPositionY,defaultPositionX);
     }
 
     public int getValueUnderCurrentPosition() {

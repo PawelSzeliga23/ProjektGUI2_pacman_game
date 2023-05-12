@@ -3,7 +3,7 @@ package Controllers;
 import java.util.Stack;
 
 public class LevelGenerator {
-    public static int[][] generateLevel(int size) {
+    public static int[][][] generateLevel(int size) {
         int[][] level;
         if (size % 2 == 0) {
             level = new int[size + 1][size + 1];
@@ -21,8 +21,6 @@ public class LevelGenerator {
             y = (int) (Math.random() * size);
         } while (y % 2 == 0);
 
-        System.out.println("x:" + x);
-        System.out.println("y:" + y);
         Stack<int[]> movesStack = new Stack<>();
         movesStack.push(new int[]{x, y});
 
@@ -87,7 +85,7 @@ public class LevelGenerator {
                 }
             }
         }
-
+        int counter = 0;
         int[][] finalLevel = new int[level.length][level.length];
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[i].length; j++) {
@@ -108,11 +106,12 @@ public class LevelGenerator {
                     }
                     finalLevel[i][j] = sum;
                 } else {
+                    counter++;
                     finalLevel[i][j] = 99;
                 }
             }
         }
-
-        return finalLevel;
+        int[][][] mazeAndCounter = new int[][][]{finalLevel,{{counter}}};
+        return mazeAndCounter;
     }
 }
